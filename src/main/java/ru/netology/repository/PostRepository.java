@@ -5,8 +5,8 @@ import ru.netology.model.Post;
 import java.util.*;
 
 public class PostRepository {
-    private int id = 1;
-    private Map<Integer, Post> postMap = new HashMap<>();
+    private long id = 0;
+    private Map<Long, Post> postMap = new HashMap<>();
 
     public List<Post> all() {
         return Collections.emptyList();
@@ -17,11 +17,16 @@ public class PostRepository {
     }
 
     public synchronized Post save(Post post) {
-        id++;
-        postMap.put(id, post);
+        if (id == 0) {
+            id++;
+            postMap.put(id, post);
+        }
         return post;
     }
 
-    public void removeById(long id) {
+    public synchronized void removeById(long id, Post post) {
+        if (id != 0) {
+            postMap.replace(id, post);
+        }
     }
 }
