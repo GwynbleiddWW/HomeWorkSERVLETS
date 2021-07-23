@@ -5,7 +5,6 @@ import ru.netology.model.Post;
 
 import java.util.*;
 
-@Repository
 public class PostRepositoryImpl implements PostRepository {
     private long id = 0;
     private Map<Long, Post> postMap = new HashMap<>();
